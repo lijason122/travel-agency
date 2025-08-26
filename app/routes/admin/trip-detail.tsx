@@ -182,7 +182,6 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
                 <h2 className="p-24-semibold text-dark-100">Popular Trips</h2>
 
                 <div className="trip-grid">
-                    {console.log(allTrips)}
                     {allTrips.map(({ id, name, imageUrls, itinerary, interests, travelStyle, estimatedPrice }) => (
                         <TripCard
                             id={id}
