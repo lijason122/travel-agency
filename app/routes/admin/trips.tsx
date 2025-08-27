@@ -42,8 +42,8 @@ const Trips = ({ loaderData }: Route.ComponentProps) => {
   return (
     <main className="all-users wrapper">
       <Header
-        title="Manage Users"
-        description="View and edit AI-generated travel plans"
+        title="Trips"
+        description="View and create AI-generated travel plans"
         ctaText="Create a trip"
         ctaUrl="/trips/create"
       />
