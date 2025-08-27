@@ -112,7 +112,24 @@ export const getAllUsers = async (limit: number, offset: number) => {
 
     if (total === 0) return { users: [], total };
 
-    return { users, total };
+    const { documents: allTrips } = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.tripCollectionId,
+      [Query.limit(1000)]
+    );
+
+    const tripCounts = allTrips.reduce((acc: Record<string, number>, trip: any) => {
+      const userId = trip.userId;
+      acc[userId] = (acc[userId] || 0) + 1;
+      return acc;
+    }, {});
+
+    const usersWithItineraryCount = users.map((user: any) => ({
+      ...user,
+      itineraryCount: tripCounts[user.accountId] || 0
+    }));
+
+    return { users: usersWithItineraryCount, total };
   } catch (e) {
     console.log('Error fetching users');
     return { users: [], total: 0 };
