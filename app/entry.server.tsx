@@ -1,4 +1,4 @@
-import './instrument.server';
+import '../instrument.server.mjs';
 import { PassThrough } from "node:stream";
 import * as Sentry from '@sentry/react-router';
 import type { AppLoadContext, EntryContext } from "react-router";
