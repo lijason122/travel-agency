@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from "react-router";
+import { useNavigate, type LoaderFunctionArgs } from "react-router";
 import { getAllTrips, getTripById } from "~/appwrite/trips";
 import type { Route } from "./+types/trip-detail";
 import { cn, getFirstWord, parseTripData } from "~/lib/utils";
@@ -30,6 +30,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 }
 
 const TripDetail = ({ loaderData }: Route.ComponentProps) => {
+    const navigate = useNavigate();
     const imageUrls = loaderData?.trip?.imageUrls || [];
     const tripData = parseTripData(loaderData?.trip?.tripDetail);
 
@@ -64,8 +65,13 @@ const TripDetail = ({ loaderData }: Route.ComponentProps) => {
 
     return (
         <main className="travel-detail wrapper">
-            <Header title="Trip Details" description="View and edit AI-generated travel plans" />
-
+            <div className="travel-div">
+                <button onClick={() => navigate(-1)} className="back-link cursor-pointer">
+                    <img src="/assets/icons/arrow-left.svg" alt="back icon" />
+                    <span>Go back</span>
+                </button>
+                <Header title="Trip Details" description="View and edit AI-generated travel plans" />
+            </div>
             <section className="container wrapper-md">
                 <header>
                     <h1 className="p-40-semibold text-dark-100">{name}</h1>

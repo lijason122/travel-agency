@@ -115,9 +115,15 @@ const createTrip = ({ loaderData }: Route.ComponentProps) => {
     ]
 
     return (
-        <main className="flex flex-col gap-10 pb-20 wrapper">
-            <Header title="Add a New Trip" description="View and edit AI Generated travel plans" />
-
+        <main className="travel-detail wrapper">
+            <div className="travel-div">
+                <button onClick={() => navigate(-1)} className="back-link cursor-pointer">
+                    <img src="/assets/icons/arrow-left.svg" alt="back icon" />
+                    <span>Go back</span>
+                </button>
+                <Header title="Add a New Trip" description="View and edit AI Generated travel plans" />
+            </div>
+            
             <section className="mt-2.5 wrapper-md">
                 <form className="trip-form" onSubmit={handleSubmit}>
                     <div>
