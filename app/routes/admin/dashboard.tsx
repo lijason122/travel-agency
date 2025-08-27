@@ -140,7 +140,7 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
               xName="day"
               yName="count"
               type="Column"
-              name="Column"
+              name="Number of Users"
               columnWidth={0.3}
               cornerRadius={{ topLeft: 10, topRight: 10 }}
             />
@@ -172,7 +172,7 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
               xName="travelStyle"
               yName="count"
               type="Column"
-              name="Day"
+              name="Number of Trips"
               columnWidth={0.3}
               cornerRadius={{ topLeft: 10, topRight: 10 }}
             />
