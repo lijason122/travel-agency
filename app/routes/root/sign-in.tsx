@@ -1,6 +1,6 @@
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons'
 import { Link, redirect } from 'react-router'
-import { loginWithGoogle } from '~/appwrite/auth';
+import { loginWithGoogle, loginAsGuest } from '~/appwrite/auth';
 import { account } from '~/appwrite/client';
 
 export async function clientLoader() {
@@ -46,6 +46,20 @@ const SignIn = () => {
 							alt='google'
 						/>
 						<span className='p-18-semibold text-white'>Sign in with Google</span>
+					</ButtonComponent>
+
+					<div className='flex items-center gap-4 my-4'>
+						<div className='flex-1 h-px bg-gray-200'></div>
+						<span className='p-16-regular text-gray-100'>or</span>
+						<div className='flex-1 h-px bg-gray-200'></div>
+					</div>
+
+					<ButtonComponent
+						type='button'
+						className='button-class !h-11 !w-full !bg-gray-100 !text-dark-100'
+						onClick={loginAsGuest}
+					>
+						<span className='p-18-semibold text-white'>Sign in as Guest</span>
 					</ButtonComponent>
 				</div>
 			</section>

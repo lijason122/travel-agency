@@ -21,7 +21,7 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
 
 			<div className="container">
 				<nav>
-					{sidebarItems.map(({ id, href, icon, label }) => (
+					{sidebarItems.filter(({ label }) => (label !== "All Users" || user?.status === "admin")).map(({ id, href, icon, label }) => (
 						<NavLink to={href} key={id}>
 							{({ isActive }: { isActive: boolean }) => (
 								<div className={cn("group nav-item", {
@@ -40,9 +40,9 @@ const NavItems = ({ handleClick }: { handleClick?: () => void }) => {
 				</nav>
 
 				<footer className="nav-footer">
-					<img src={user?.imageUrl || '/assets/images/david.webp'} alt={user?.name || 'David'} referrerPolicy="no-referrer" />
+					<img src={user?.imageUrl || '/assets/images/michael.webp'} alt={user?.name || 'Guest'} referrerPolicy="no-referrer" />
 					<article>
-						<h2>{user?.name}</h2>
+						<h2>{user?.name || "Guest"}</h2>
 						<p>{user?.email}</p>
 					</article>
 

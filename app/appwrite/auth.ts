@@ -73,6 +73,15 @@ export const loginWithGoogle = async () => {
   }
 };
 
+export const loginAsGuest = async () => {
+  try {
+    await account.createAnonymousSession();
+    window.location.href = '/';
+  } catch (error) {
+    console.error("Error during anonymous login:", error);
+  }
+};
+
 export const logoutUser = async () => {
   try {
     await account.deleteSession("current");
