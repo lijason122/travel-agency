@@ -62,7 +62,7 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
     interest: trip.interests,
   }));
 
-  const usersAndTrips = [
+  let usersAndTrips = [
     {
       title: 'Latest user signups',
       dataSource: allUsers,
@@ -76,6 +76,9 @@ const Dashboard = ({ loaderData }: Route.ComponentProps) => {
       headerText: 'Interest'
     },
   ]
+  if (!user?.name) {
+    usersAndTrips = usersAndTrips.filter((items) => items.field !== 'count');
+  }
   
   return (
     <main className="dashboard wrapper">
