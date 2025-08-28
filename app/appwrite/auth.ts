@@ -61,13 +61,16 @@ const getGooglePicture = async (accessToken: string) => {
   }
 };
 
-export const loginWithGoogle = async () => {
+export const loginWithGoogle = async (onSuccess?: () => void) => {
   try {
     account.createOAuth2Session(
       OAuthProvider.Google,
-      `${window.location.origin}/`,
+      `${window.location.origin}/?oauth=success`,
       `${window.location.origin}/404`
     );
+    
+    // Note: OAuth redirects to the main page, so we'll handle the notification there
+    // The onSuccess callback will be called after the redirect
   } catch (error) {
     console.error("Error during OAuth2 session creation:", error);
   }
@@ -87,6 +90,7 @@ export const logoutUser = async () => {
     await account.deleteSession("current");
   } catch (error) {
     console.error("Error during logout:", error);
+    throw error; // Re-throw the error so it can be handled by the calling component
   }
 };
 

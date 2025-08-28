@@ -2,6 +2,7 @@ import { ButtonComponent } from '@syncfusion/ej2-react-buttons'
 import { Link, redirect } from 'react-router'
 import { loginWithGoogle, loginAsGuest } from '~/appwrite/auth';
 import { account } from '~/appwrite/client';
+import { useNotification } from '~/lib/notification-context';
 
 export async function clientLoader() {
 	try {
@@ -14,6 +15,19 @@ export async function clientLoader() {
 }
 
 const SignIn = () => {
+	const { showNotification } = useNotification();
+
+	const handleGoogleSignIn = () => {
+		loginWithGoogle(() => {
+			showNotification('Successfully signed in with Google!', 'success');
+		});
+	};
+
+	const handleGuestSignIn = () => {
+		loginAsGuest();
+		showNotification('Successfully signed in as guest!', 'success');
+	};
+
 	return (
 		<main className='auth'>
 			<section className='size-full glassmorphism flex-center px-6'>
@@ -38,7 +52,7 @@ const SignIn = () => {
 						type='button'
 						iconCss='e-search-icon'
 						className='button-class !h-11 !w-full'
-						onClick={loginWithGoogle}
+						onClick={handleGoogleSignIn}
 					>
 						<img 
 							src='/assets/icons/google.svg'
@@ -57,7 +71,7 @@ const SignIn = () => {
 					<ButtonComponent
 						type='button'
 						className='button-class !h-11 !w-full !bg-gray-100 !text-dark-100'
-						onClick={loginAsGuest}
+						onClick={handleGuestSignIn}
 					>
 						<span className='p-18-semibold text-white'>Sign in as Guest</span>
 					</ButtonComponent>

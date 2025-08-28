@@ -9,6 +9,7 @@ import { world_map } from '~/constants/world_map';
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import { account } from '~/appwrite/client';
 import { useNavigate } from 'react-router';
+import { useNotification } from '~/lib/notification-context';
 
 export const loader = async () => {
     const response = await fetch('https://restcountries.com/v3.1/all?fields=name,flag');
@@ -25,6 +26,7 @@ export const loader = async () => {
 const createTrip = ({ loaderData }: Route.ComponentProps) => {
     const countries = loaderData as Country[];
     const navigate = useNavigate();
+    const { showNotification } = useNotification();
 
     const [formData, setFormData] = useState<TripFormData>({
         country: countries[0]?.name || '',
@@ -86,6 +88,7 @@ const createTrip = ({ loaderData }: Route.ComponentProps) => {
             const result: CreateTripResponse = await response.json();
 
             if (result?.id) {
+                showNotification('Trip generated successfully!', 'success');
                 navigate(`/trips/${result.id}`);
             } else {
                 console.error('Failed to generate a trip');

@@ -3,6 +3,7 @@ import {SidebarComponent} from "@syncfusion/ej2-react-navigations";
 import { MobileSidebar, NavItems } from '../../../components';
 import { account } from '~/appwrite/client';
 import { getExistingUser, storeUserData } from '~/appwrite/auth';
+import { useAuthNotification } from '~/lib/use-auth-notification';
 
 export async function clientLoader() {
 	try {
@@ -20,6 +21,9 @@ export async function clientLoader() {
 }
 
 const AdminLayout = () => {
+  // Use the auth notification hook to detect OAuth sign-ins
+  useAuthNotification();
+
   return (
     <div className="admin-layout">
         <MobileSidebar />
